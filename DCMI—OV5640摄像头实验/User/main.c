@@ -8,7 +8,7 @@
   ******************************************************************
   * @attention
   *
-  * 实验平台:野火 STM32H750开发板 
+  * 实验平台:野火 STM32H743开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :http://firestm32.taobao.com
   *
@@ -68,7 +68,7 @@ int main(void)
 	/* 配置串口1为：115200 8-N-1 */
 	UARTx_Config();	
 	
-	printf("\r\n 欢迎使用野火  STM32 H750 开发板。\r\n");		 
+	printf("\r\n 欢迎使用野火  STM32 H743 开发板。\r\n");		 
 	printf("\r\n野火STM32H750 OV5640摄像头测试例程\r\n");
 	/*蓝灯亮，表示正在读写SDRAM测试*/
 	LED_BLUE;

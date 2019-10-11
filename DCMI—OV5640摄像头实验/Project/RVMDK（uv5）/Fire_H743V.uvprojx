@@ -333,7 +333,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32H750xx,APPLICATION_ADDRESS = 0x8000000</Define>
+              <Define>USE_HAL_DRIVER,STM32H750xx</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\FATFS;..\..\User\FATFS\drivers;..\..\User\FATFS\option</IncludePath>
             </VariousControls>
@@ -1268,6 +1268,13 @@
         </Group>
         <Group>
           <GroupName>DOC</GroupName>
+          <Files>
+            <File>
+              <FileName>必读说明.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\Doc\必读说明.txt</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

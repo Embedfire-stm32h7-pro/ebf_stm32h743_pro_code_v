@@ -185,12 +185,12 @@
             <RvdsVP>3</RvdsVP>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>1</hadIROM2>
-            <StupSel>16</StupSel>
+            <StupSel>8</StupSel>
             <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
-            <RoSelD>4</RoSelD>
+            <RoSelD>3</RoSelD>
             <RwSelD>4</RwSelD>
             <CodeSel>0</CodeSel>
             <OptFeed>0</OptFeed>
@@ -203,7 +203,7 @@
             <Ro2Chk>0</Ro2Chk>
             <Ro3Chk>0</Ro3Chk>
             <Ir1Chk>1</Ir1Chk>
-            <Ir2Chk>1</Ir2Chk>
+            <Ir2Chk>0</Ir2Chk>
             <Ra1Chk>0</Ra1Chk>
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
@@ -273,20 +273,20 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x100000</Size>
+                <Size>0x200000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
-                <StartAddress>0x8100000</StartAddress>
-                <Size>0x100000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
               </OCR_RVCT5>
               <OCR_RVCT6>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x30000000</StartAddress>
                 <Size>0x48000</Size>
               </OCR_RVCT6>
               <OCR_RVCT7>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x38000000</StartAddress>
                 <Size>0x10000</Size>
               </OCR_RVCT7>
@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\FATFS;..\..\User\FATFS\drivers;..\..\User\FATFS\option</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -799,141 +799,6 @@
               <FileType>1</FileType>
               <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_wwdg.c</FilePath>
             </File>
-            <File>
-              <FileName>stm32h7xx_ll_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_bdma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_bdma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_comp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_comp.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_crc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_crc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_dac.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_dac.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_delayblock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_delayblock.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_dma2d.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_dma2d.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_exti.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_exti.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_fmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_fmc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_hrtim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_hrtim.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_lptim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_lptim.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_lpuart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_lpuart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_mdma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_mdma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_opamp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_opamp.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_pwr.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_rng.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_rng.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_rtc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_sdmmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_sdmmc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_swpmi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_swpmi.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32h7xx_ll_usb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_ll_usb.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -968,11 +833,34 @@
         </Group>
         <Group>
           <GroupName>DOC</GroupName>
+        </Group>
+        <Group>
+          <GroupName>FatFs</GroupName>
           <Files>
             <File>
-              <FileName>必读说明.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Doc\必读说明.txt</FilePath>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\FATFS\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\FATFS\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff_gen_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\FATFS\ff_gen_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>fatfs_flash_qspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\FATFS\drivers\fatfs_flash_qspi.c</FilePath>
+            </File>
+            <File>
+              <FileName>cc936.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\FATFS\option\cc936.c</FilePath>
             </File>
           </Files>
         </Group>

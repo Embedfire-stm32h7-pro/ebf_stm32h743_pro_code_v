@@ -112,7 +112,7 @@ static void ADC_Mode_Config(void)
 	
 	ADC_Handle.Instance = RHEOSTAT_ADC;
 	//使能Boost模式
-	ADC_Handle.Init.BoostMode = ENABLE;
+	//ADC_Handle.Init.BoostMode = ENABLE;
 	//ADC时钟1分频
 	ADC_Handle.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
 	//使能连续转换模式

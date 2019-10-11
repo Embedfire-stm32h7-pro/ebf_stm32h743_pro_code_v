@@ -829,40 +829,20 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\usart\bsp_debug_usart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_mpu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\mpu\bsp_mpu.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\adc\bsp_adc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>DOC</GroupName>
-        </Group>
-        <Group>
-          <GroupName>FatFs</GroupName>
-          <Files>
-            <File>
-              <FileName>ff.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\ff.c</FilePath>
-            </File>
-            <File>
-              <FileName>diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\diskio.c</FilePath>
-            </File>
-            <File>
-              <FileName>ff_gen_drv.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\ff_gen_drv.c</FilePath>
-            </File>
-            <File>
-              <FileName>fatfs_flash_qspi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\drivers\fatfs_flash_qspi.c</FilePath>
-            </File>
-            <File>
-              <FileName>cc936.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\option\cc936.c</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>

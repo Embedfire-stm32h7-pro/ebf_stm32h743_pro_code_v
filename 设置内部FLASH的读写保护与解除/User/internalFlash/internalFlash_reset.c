@@ -39,7 +39,7 @@ HAL_StatusTypeDef InternalFlash_Reset(void)
 	OBInit.RDPLevel  = OB_RDP_LEVEL_0;
 	OBInit.USERConfig  = OB_WWDG_SW|OB_IWDG_SW|OB_STOP_NO_RST|OB_STDBY_NO_RST|\
 					     OB_IWDG_STOP_ACTIVE|OB_IWDG_STDBY_ACTIVE;
-	OBInit.BORLevel = OB_BOR_OFF;
+	OBInit.BORLevel = OB_BOR_LEVEL0;
 	OBInit.BootAddr0 = OB_BOOTADDR_ITCM_FLASH;
 	OBInit.BootAddr1 = OB_BOOTADDR_SYSTEM;
 	HAL_FLASHEx_OBProgram(&OBInit);
@@ -258,7 +258,7 @@ void OptionByte_Info(void)
 				FLASH_DEBUG("复位阈值电压为 2.10 V 到 2.40 V");
 				break;
 			
-		case OB_BOR_OFF:
+		case OB_BOR_LEVEL0:
 				FLASH_DEBUG("默认值：复位阈值电压为 1.80 V 到 2.10 V");
 				break;	
 	}			

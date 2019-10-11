@@ -8,17 +8,17 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火  STM32 H743 开发板  
+  * 实验平台:秉火  STM32 H743 开发板  
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :http://firestm32.taobao.com
   *
   ******************************************************************************
   */
-#include "./FATFS/drivers/fatfs_sd_sdio.h"
+#include "./drivers/fatfs_sd_sdio.h"
 #include <stdio.h>
 #include <string.h>
 #include "./sd_card/bsp_sdio_sd.h"
-#include "./FATFS/ff_gen_drv.h"
+#include "ff_gen_drv.h"
 #include "./led/bsp_led.h" 
 /* Disk status */
 static volatile DSTATUS Stat = STA_NOINIT;
@@ -159,7 +159,6 @@ DRESULT SD_write(BYTE lun,//物理扇区，多个设备时用到(0...)
              break;
           }
         }
-				
       }
     }
     return res;

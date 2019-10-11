@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火  STM32 H7543 开发板  
+  * 实验平台:野火  STM32 H743 开发板  
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :http://firestm32.taobao.com
   *
@@ -25,9 +25,9 @@
 //#include "./flash/bsp_qspi_flash.h"
 #include "./delay/core_delay.h"   
 
-#include "./FATFS/ff.h"
-#include "./FATFS/ff_gen_drv.h"
-#include "./FATFS/sd_diskio.h"
+#include "ff.h"
+#include "ff_gen_drv.h"
+#include "sd_diskio.h"
 
 
 #define POLY_X(Z)              ((int32_t)((Points + Z)->X))

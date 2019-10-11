@@ -8,7 +8,7 @@
   ******************************************************************
   * @attention
   *
-  * 实验平台:野火 STM32H743 开发板 
+  * 实验平台:野火 STM32H743开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :http://firestm32.taobao.com
   *
@@ -31,6 +31,7 @@ void LED_GPIO_Config(void)
 	LED1_GPIO_CLK_ENABLE();
 	LED2_GPIO_CLK_ENABLE();
 	LED3_GPIO_CLK_ENABLE();
+//	LED4_GPIO_CLK_ENABLE();
 
 	/*选择要控制的GPIO引脚*/															   
 	GPIO_InitStruct.Pin = LED1_PIN;	
@@ -55,7 +56,15 @@ void LED_GPIO_Config(void)
 	GPIO_InitStruct.Pin = LED3_PIN;	
 	HAL_GPIO_Init(LED3_GPIO_PORT, &GPIO_InitStruct);	
 
+//	/*选择要控制的GPIO引脚*/															   
+//	GPIO_InitStruct.Pin = LED4_PIN;	
+//	HAL_GPIO_Init(LED4_GPIO_PORT, &GPIO_InitStruct);	
+
 	/*关闭RGB灯*/
-	LED_RGBOFF;	
+	LED_RGBOFF;
+
+//	/*指示灯默认开启*/
+//	LED4(ON);
+		
 }
 /*********************************************END OF FILE**********************/

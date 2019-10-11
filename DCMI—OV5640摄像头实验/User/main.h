@@ -5,6 +5,5 @@
 
 static void SystemClock_Config(void);
 void SysTick_Init(void);
-
 #endif /* __MAIN_H */
 

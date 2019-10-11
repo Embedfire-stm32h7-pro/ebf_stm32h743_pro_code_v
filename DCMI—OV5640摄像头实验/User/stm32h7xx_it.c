@@ -34,7 +34,6 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx.h"
 #include "stm32h7xx_it.h"
-#include "main.h"
 #include "./camera/bsp_ov5640.h"
 
 /* USER CODE BEGIN 0 */

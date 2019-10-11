@@ -1,22 +1,13 @@
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    stm32h7xx_hal_msp_template.c
-  * @author  MCD Application Team
-  * @brief   HAL MSP module.
-  *          This file template is located in the HAL folder and should be copied
-  *          to the user folder.
-  *
-  @verbatim
- ===============================================================================
-                     ##### How to use this driver #####
- ===============================================================================
-    [..]
-
-  @endverbatim
+  * File Name          : stm32h7xx_hal_msp.c
+  * Description        : This file provides code for the MSP Initialization 
+  *                      and de-Initialization codes.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -26,76 +17,67 @@
   *
   ******************************************************************************
   */
+/* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32h7xx_hal.h"
+#include "main.h"
+/* USER CODE BEGIN Includes */
 
-/** @addtogroup STM32H7xx_HAL_Driver
-  * @{
-  */
-
-/** @defgroup HAL_MSP HAL MSP
-  * @brief HAL MSP module.
-  * @{
-  */
+/* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN TD */
+
+/* USER CODE END TD */
+
 /* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN Define */
+ 
+/* USER CODE END Define */
+
 /* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN Macro */
+
+/* USER CODE END Macro */
+
 /* Private variables ---------------------------------------------------------*/
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
+
 /* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+/* USER CODE BEGIN PFP */
 
-/** @defgroup HAL_MSP_Private_Functions HAL MSP Private Functions
-  * @{
-  */
+/* USER CODE END PFP */
 
+/* External functions --------------------------------------------------------*/
+/* USER CODE BEGIN ExternalFunctions */
+
+/* USER CODE END ExternalFunctions */
+
+/* USER CODE BEGIN 0 */
+
+/* USER CODE END 0 */
 /**
-  * @brief  Initializes the Global MSP.
-  * @retval None
+  * Initializes the Global MSP.
   */
 void HAL_MspInit(void)
 {
+  /* USER CODE BEGIN MspInit 0 */
 
+  /* USER CODE END MspInit 0 */
+
+  __HAL_RCC_SYSCFG_CLK_ENABLE();
+
+  /* System interrupt init*/
+
+  /* USER CODE BEGIN MspInit 1 */
+
+  /* USER CODE END MspInit 1 */
 }
 
-/**
-  * @brief  DeInitializes the Global MSP.
-  * @retval None
-  */
-void HAL_MspDeInit(void)
-{
+/* USER CODE BEGIN 1 */
 
-}
-
-/**
-  * @brief  Initializes the PPP MSP.
-  * @retval None
-  */
-void HAL_PPP_MspInit(void)
-{
-
-}
-
-/**
-  * @brief  DeInitializes the PPP MSP.
-  * @retval None
-  */
-void HAL_PPP_MspDeInit(void)
-{
-
-}
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
+/* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

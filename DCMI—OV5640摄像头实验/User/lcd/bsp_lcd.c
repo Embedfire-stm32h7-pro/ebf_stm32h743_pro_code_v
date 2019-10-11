@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火  STM32 H743 开发板  
+  * 实验平台:野火  STM32 H750 开发板  
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :http://firestm32.taobao.com
   *
@@ -32,6 +32,10 @@
 #define POLY_Y(Z)              ((int32_t)((Points + Z)->Y)) 
 
 #define ABS(X)  ((X) > 0 ? (X) : -(X))
+
+#if USE_ExtFlash_Single
+extern __IO uint8_t* qspi_addr;
+#endif
 
 static LTDC_HandleTypeDef  Ltdc_Handler;
 static DMA2D_HandleTypeDef Dma2d_Handler;
@@ -1599,6 +1603,9 @@ static void LL_ConvertLineToARGB8888(void *pSrc, void *pDst, uint32_t xSize, uin
 #if GBKCODE_FLASH
 
 /*使用FLASH字模*/
+
+//中文字库存储在FLASH的起始地址 ：
+//GBKCODE_START_ADDRESS 在fonts.h文件定义
 /**
   * @brief  获取FLASH中文显示字库数据
 	* @param  pBuffer:存储字库矩阵的缓冲区
@@ -1612,27 +1619,29 @@ int GetGBKCode_from_EXFlash( uint8_t * pBuffer, uint16_t c)
 	int offset, GBKCODE_START_ADDRESS;
 	
 	static uint8_t everRead=0;
-	
-	if(everRead == 0)
-	{
-		QSPI_FLASH_Init();
-		everRead = 1;
-	}
 
 	High8bit= c >> 8;     /* 取高8位数据 */
 	Low8bit= c & 0x00FF;  /* 取低8位数据 */		
 
+#if USE_ExtFlash_Single
 	offset = GetResOffset("GB2312_H2424.FON");
 	if(offset == -1)
 		printf("无法在FLASH中找到字库文件\r\n");
 	else
 		GBKCODE_START_ADDRESS = offset + RESOURCE_BASE_ADDR;
-
+	
+	/*GB2312 公式*/
+	pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*24*24/8;
+	memcpy(pBuffer, (uint8_t *)qspi_addr+GBKCODE_START_ADDRESS+pos, 24*24/8);//读取字库数据  
+	
+	return 0; 
+#else
 	/*GB2312 公式*/
 	pos = ((High8bit-0xa1)*94+Low8bit-0xa1)*24*24/8;
 	BSP_QSPI_FastRead(pBuffer,GBKCODE_START_ADDRESS+pos,24*24/8); //读取字库数据  
-	SCB_InvalidateDCache_by_Addr((uint32_t*)pBuffer,sizeof(pBuffer));
+	
 	return 0;  
+#endif
 }
 
 /**
@@ -1643,13 +1652,19 @@ int GetGBKCode_from_EXFlash( uint8_t * pBuffer, uint16_t c)
   */
 int GetResOffset(const char *res_name)
 {
+  
 	int i,len;
 	CatalogTypeDef dir;
+	uint8_t CATALOG_BUF[CATALOG_SIZE];
 
 	len =strlen(res_name);
 	for(i=0;i<CATALOG_SIZE;i+=sizeof(CatalogTypeDef))
 	{
-		BSP_QSPI_FastRead((uint8_t*)&dir,RESOURCE_BASE_ADDR+i,sizeof(CatalogTypeDef));
+#if USE_ExtFlash_Single
+		memcpy((uint8_t*)&dir, (uint8_t *)qspi_addr+RESOURCE_BASE_ADDR+i, sizeof(CatalogTypeDef));    
+#else
+		BSP_QSPI_FastRead((uint8_t*)&dir, RESOURCE_BASE_ADDR+i, sizeof(CatalogTypeDef));
+#endif
 		if(strncasecmp(dir.name,res_name,len)==0)
 		{
 			return dir.offset;

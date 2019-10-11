@@ -7,8 +7,7 @@
 
 
 //#define W9812G6JH_SIZE 0x1000000  //16M字节
-//#define IS42S16400J_SIZE (32*1024*1024)  //32M字节，W9825G6
-#define W9825G6_SIZE (32*1024*1024*2)  //64M字节，W9825G6
+#define IW9825G6_SIZE (64*1024*1024)  //64M字节，W9825G6
 
 /*SDRAM 的bank选择*/  
 #define FMC_BANK_SDRAM            FMC_Bank2_SDRAM  
@@ -23,7 +22,7 @@
   * @brief  FMC SDRAM 数据宽度
   */  
 /* #define SDRAM_MEMORY_WIDTH   FMC_SDMemory_Width_8b  */
-/* #define SDRAM_MEMORY_WIDTH   FMC_SDRAM_MEM_BUS_WIDTH_16  */
+/* #define SDRAM_MEMORY_WIDTH   FMC_SDRAM_MEM_BUS_WIDTH_16 */
 #define SDRAM_MEMORY_WIDTH    FMC_SDRAM_MEM_BUS_WIDTH_32 
 
 /**
@@ -311,7 +310,7 @@
 #define FMC_LDQM2_GPIO_PORT       GPIOI
 #define FMC_LDQM2_GPIO_CLK()      __GPIOI_CLK_ENABLE()
 #define FMC_LDQM2_GPIO_PIN        GPIO_PIN_4
-/** @defgroup STM32429 SDRAM函数
+/** @defgroup STM32H750 SDRAM函数
   * @{
   */ 
 void  SDRAM_Init(void);
@@ -321,4 +320,3 @@ uint8_t SDRAM_Test(void);
 
 
 #endif /* __SDRAM_H */
-

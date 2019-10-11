@@ -94,13 +94,12 @@ static void I2Cx_Error(void)
   * @param  Data: 要写入的数据
   * @retval 返回0表示写入正常，0xFF表示错误
   */
-uint8_t OV5640_WriteReg(uint16_t Addr, uint8_t Data)
+uint8_t OV2640_WriteReg(uint16_t Addr, uint8_t Data)
 {
 //    I2Cx_WriteMultiple(&I2C_Handle, OV2640_DEVICE_WRITE_ADDRESS, (uint16_t)Addr, I2C_MEMADD_SIZE_8BIT,(uint8_t*)&Data, 1);
   HAL_StatusTypeDef status = HAL_OK;
   
-  
-  status = HAL_I2C_Mem_Write(&I2C_Handle, OV5640_DEVICE_ADDRESS, (uint16_t)Addr, I2C_MEMADD_SIZE_16BIT, (uint8_t*)&Data, 1, 1000);
+  status = HAL_I2C_Mem_Write(&I2C_Handle, OV2640_DEVICE_ADDRESS, (uint16_t)Addr, I2C_MEMADD_SIZE_8BIT, (uint8_t*)&Data, 1, 1000);
   
   /* Check the communication status */
   if(status != HAL_OK)
@@ -116,14 +115,14 @@ uint8_t OV5640_WriteReg(uint16_t Addr, uint8_t Data)
   * @param  Addr: 寄存器地址
   * @retval 返回读取得的数据
   */
-uint8_t OV5640_ReadReg(uint16_t Addr)
+uint8_t OV2640_ReadReg(uint16_t Addr)
 {
     uint8_t Data = 0;
 //    I2Cx_ReadMultiple(&I2C_Handle, OV2640_DEVICE_READ_ADDRESS, Addr, I2C_MEMADD_SIZE_8BIT, (uint8_t*)&Data, 1);
     
   HAL_StatusTypeDef status = HAL_OK;
 
-  status = HAL_I2C_Mem_Read(&I2C_Handle, OV5640_DEVICE_ADDRESS, (uint16_t)Addr, I2C_MEMADD_SIZE_16BIT, (uint8_t*)&Data, 1, 1000);
+  status = HAL_I2C_Mem_Read(&I2C_Handle, OV2640_DEVICE_ADDRESS, (uint16_t)Addr, I2C_MEMADD_SIZE_8BIT, (uint8_t*)&Data, 1, 1000);
 
   /* Check the communication status */
   if(status != HAL_OK)
@@ -134,28 +133,3 @@ uint8_t OV5640_ReadReg(uint16_t Addr)
   /* return the read data */
     return Data;
 }
-
-/**
-  * @brief  将固件写入到OV5640片内MCU
-  * @param  Addr: OV5640 的MCU基地址0x8000
-  * @param  Data: 要写入的数据
-  * @retval 返回0表示写入正常，0xFF表示错误
-  */
-uint8_t OV5640_WriteFW(uint8_t *pBuffer ,uint16_t BufferSize)
-{
-  uint16_t Addr=0x8000;
-  HAL_StatusTypeDef status = HAL_OK;
-  
-  status = HAL_I2C_Mem_Write(&I2C_Handle, OV5640_DEVICE_ADDRESS, (uint16_t)Addr, I2C_MEMADD_SIZE_16BIT, pBuffer, BufferSize, 1000);
-  
-  /* 检查通信状态 */
-  if(status != HAL_OK)
-  {
-    /* 发生错误重新初始化I2C */
-    I2Cx_Error();
-  }
-  return status;
-}
-
-
-

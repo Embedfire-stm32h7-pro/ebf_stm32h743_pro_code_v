@@ -22,8 +22,7 @@
 #include "./lcd/bsp_lcd.h"
 #include "string.h"
 #include "./i2c/bsp_i2c.h"
-#include "./camera/bsp_ov5640.h"
-#include "./camera/ov5640_AF.h"
+#include "./camera/bsp_ov2640.h"
 #include "./delay/core_delay.h"  
 #include "./mpu/bsp_mpu.h"
 
@@ -46,7 +45,7 @@ uint8_t fps=0;
   */
 int main(void)
 {  
-	OV5640_IDTypeDef OV5640_Camera_ID;
+	OV2640_IDTypeDef OV2640_Camera_ID;
 	
 	/* 系统时钟初始化成480MHz */
 	SystemClock_Config();
@@ -69,7 +68,7 @@ int main(void)
 	UARTx_Config();	
 	
 	printf("\r\n 欢迎使用野火  STM32 H743 开发板。\r\n");		 
-	printf("\r\n野火STM32H750 OV5640摄像头测试例程\r\n");
+	printf("\r\n野火STM32H743 OV2640摄像头测试例程\r\n");
 	/*蓝灯亮，表示正在读写SDRAM测试*/
 	LED_BLUE;
 	/* LCD 端口初始化 */ 
@@ -99,31 +98,29 @@ int main(void)
 	
 	LCD_SetColors(LCD_COLOR_WHITE,TRANSPARENCY);
 	LCD_DisplayStringLine_EN_CH(1,(uint8_t* )" 模式:UXGA 800x480");
-	CAMERA_DEBUG("STM32H750 DCMI 驱动OV5640例程");
+	CAMERA_DEBUG("STM32H743 DCMI 驱动OV2640例程");
 	I2CMaster_Init();
-	OV5640_HW_Init();			
+	OV2640_HW_Init();			
 	//初始化 I2C
 	
 	/* 读取摄像头芯片ID，确定摄像头正常连接 */
-	OV5640_ReadID(&OV5640_Camera_ID);
+	OV2640_ReadID(&OV2640_Camera_ID);
 
-	if(OV5640_Camera_ID.PIDH  == 0x56)
+	if(OV2640_Camera_ID.PIDH  == 0x26)
 	{
-		CAMERA_DEBUG("%x%x",OV5640_Camera_ID.PIDH ,OV5640_Camera_ID.PIDL);
+		CAMERA_DEBUG("%x%x",OV2640_Camera_ID.PIDH ,OV2640_Camera_ID.PIDL);
 	}
 	else
 	{
 		LCD_SetColors(LCD_COLOR_WHITE,TRANSPARENCY);
-		LCD_DisplayStringLine_EN_CH(8,(uint8_t*) "         没有检测到OV5640，请重新检查连接。");
-		CAMERA_DEBUG("没有检测到OV5640摄像头，请重新检查连接。");
+		LCD_DisplayStringLine_EN_CH(8,(uint8_t*) "         没有检测到OV2640，请重新检查连接。");
+		CAMERA_DEBUG("没有检测到OV2640摄像头，请重新检查连接。");
 		while(1);  
 	}
 		/* 配置摄像头输出像素格式 */
-	OV5640_RGB565Config();	
+	OV2640_UXGAConfig();
 	/* 初始化摄像头，捕获并显示图像 */
-	OV5640_Init();
-	//刷OV5640的自动对焦固件
-	OV5640_AUTO_FOCUS();
+	OV2640_Init();
 	//重置
 	fps =0;
 	Task_Delay[0]=1000;
@@ -178,7 +175,7 @@ void SystemClock_Config(void)
   HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
   /** 配置主内稳压器输出电压
   */
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
  

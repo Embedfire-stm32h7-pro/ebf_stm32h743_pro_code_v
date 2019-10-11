@@ -7,7 +7,7 @@
 /****************************** Defines *******************************/
 
 #define I2C_OWN_ADDRESS           0x00
-#define OV5640_DEVICE_ADDRESS     0x78
+#define OV2640_DEVICE_ADDRESS     0x60
 
 //毫秒级延时(需要定时器支持)，或者重写Delay宏
 #define Delay 		HAL_Delay
@@ -65,9 +65,8 @@ HAL_StatusTypeDef Sensors_I2C_WriteRegister(unsigned char slave_addr,
                                         unsigned short len, 
                                         unsigned char *data_ptr);
 
-uint8_t OV5640_WriteReg(uint16_t Addr, uint8_t Data);
-uint8_t OV5640_ReadReg(uint16_t Addr);
-uint8_t OV5640_WriteFW(uint8_t *pBuffer ,uint16_t BufferSize);
+uint8_t OV2640_WriteReg(uint16_t Addr, uint8_t Data);
+uint8_t OV2640_ReadReg(uint16_t Addr);
 #endif // __BSP_I2C_H__
 
 

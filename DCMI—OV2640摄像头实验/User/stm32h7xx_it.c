@@ -34,7 +34,7 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx.h"
 #include "stm32h7xx_it.h"
-#include "./camera/bsp_ov5640.h"
+#include "./camera/bsp_ov2640.h"
 
 /* USER CODE BEGIN 0 */
 extern DMA_HandleTypeDef DMA_Handle_dcmi;

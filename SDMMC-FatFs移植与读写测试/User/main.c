@@ -4,7 +4,7 @@
   * @author  fire
   * @version V1.0
   * @date    2018-xx-xx
-  * @brief   LTDC°™“∫æßœ‘ æ”¢Œƒ
+  * @brief   FatFs“∆÷≤≤‚ ‘
   ******************************************************************
   * @attention
   *

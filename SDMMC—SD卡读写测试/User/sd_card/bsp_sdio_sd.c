@@ -17,6 +17,7 @@
 #include "./sd_card/bsp_sdio_sd.h"
 #include "./led/bsp_led.h"   
 #include "./delay/core_delay.h" 
+#include "stdio.h"
 SD_HandleTypeDef uSdHandle;
 
 

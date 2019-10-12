@@ -10,7 +10,7 @@
       <TargetName>Fire_H7</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -836,6 +836,11 @@
               <FileName>bsp_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\i2c\bsp_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\usart\bsp_usart.c</FilePath>
             </File>
           </Files>
         </Group>

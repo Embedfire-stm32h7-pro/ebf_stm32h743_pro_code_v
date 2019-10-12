@@ -84,9 +84,9 @@ static void TIMx_Configuration(void)
     TIM_Handle.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     //定时器时钟源TIMxCLK = 2 * PCLK1  
     //				PCLK1 = HCLK / 4 
-    //				=> TIMxCLK=HCLK/2=SystemCoreClock/2=200MHz
+    //				=> TIMxCLK=HCLK/2=SystemCoreClock/2=240MHz
     // 设定定时器频率为=TIMxCLK/(TIM_Prescaler+1)=1000000Hz
-    TIM_Handle.Init.Prescaler =  200 - 1;   
+    TIM_Handle.Init.Prescaler =  240 - 1;   
     // 初始化定时器TIM
     HAL_TIM_PWM_Init(&TIM_Handle);
   

@@ -37,7 +37,7 @@ int main(void)
   uint8_t IntStatus;
   
   HAL_Init();        
-  /* 配置系统时钟为400 MHz */ 
+  /* 配置系统时钟为480 MHz */ 
   SystemClock_Config();
   LED_GPIO_Config();
   /* 初始化内核延时 */

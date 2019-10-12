@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\FATFS</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\FATFS;..\..\User\mp3\real;..\..\User\mp3\pub</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -961,6 +961,16 @@
               <FileName>trigtabs.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\mp3\real\trigtabs.c</FilePath>
+            </File>
+            <File>
+              <FileName>asmmisc.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\User\mp3\real\arm\asmmisc.s</FilePath>
+            </File>
+            <File>
+              <FileName>asmpoly_thumb2.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\User\mp3\real\arm\asmpoly_thumb2.s</FilePath>
             </File>
           </Files>
         </Group>

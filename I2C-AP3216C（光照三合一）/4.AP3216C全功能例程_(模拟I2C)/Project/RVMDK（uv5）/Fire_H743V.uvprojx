@@ -10,7 +10,8 @@
       <TargetName>Fire_H7</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32H743XIHx</Device>
@@ -183,6 +184,7 @@
             <hadXRAM>1</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>1</hadIROM2>
             <StupSel>8</StupSel>
@@ -323,6 +325,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
@@ -825,44 +828,24 @@
               <FilePath>..\..\User\delay\core_delay.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_debug_usart.c</FileName>
+              <FileName>ap3216c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\usart\bsp_debug_usart.c</FilePath>
+              <FilePath>..\..\User\ap3216c\ap3216c.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\i2c\bsp_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\usart\bsp_usart.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>DOC</GroupName>
-        </Group>
-        <Group>
-          <GroupName>FatFs</GroupName>
-          <Files>
-            <File>
-              <FileName>ff.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\ff.c</FilePath>
-            </File>
-            <File>
-              <FileName>diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\diskio.c</FilePath>
-            </File>
-            <File>
-              <FileName>ff_gen_drv.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\ff_gen_drv.c</FilePath>
-            </File>
-            <File>
-              <FileName>fatfs_flash_qspi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\drivers\fatfs_flash_qspi.c</FilePath>
-            </File>
-            <File>
-              <FileName>cc936.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\option\cc936.c</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>

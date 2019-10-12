@@ -4,7 +4,7 @@
   * @author  STMicroelectronics
   * @version V1.0
   * @date    2015-xx-xx
-  * @brief   基本定时器定时范例
+  * @brief   基本定时器互补输出
   ******************************************************************************
   * @attention
   *

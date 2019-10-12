@@ -6,7 +6,7 @@ Purpose :
 #define __I2C_H__
 /****************************** Includes *****************************/
 #include "stm32h7xx.h"
-#include "./usart/bsp_debug_usart.h"
+#include "./usart/bsp_usart.h"
 /****************************** Defines *******************************/
 
 #define I2C_OWN_ADDRESS           0x00

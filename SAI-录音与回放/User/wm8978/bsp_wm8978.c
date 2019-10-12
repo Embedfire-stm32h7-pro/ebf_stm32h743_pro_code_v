@@ -15,7 +15,7 @@
 ******************************************************************************
 */
 #include "./wm8978/bsp_wm8978.h"  
-#include "./usart/bsp_debug_usart.h"
+#include "./usart/bsp_usart.h"
 #include "main.h"
 #include "./i2c/i2c.h"
 //#include "./Recorder/Recorder.h"

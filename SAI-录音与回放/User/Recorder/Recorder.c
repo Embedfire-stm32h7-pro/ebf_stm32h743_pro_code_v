@@ -14,7 +14,7 @@
 *
 ******************************************************************************
 */
-#include "./usart/bsp_debug_usart.h"
+#include "./usart/bsp_usart.h"
 #include "./key/bsp_key.h" 
 #include "./wm8978/bsp_wm8978.h"
 #include "./touch_pad/bsp_touchpad.h"

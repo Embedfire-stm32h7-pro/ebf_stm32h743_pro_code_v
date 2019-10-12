@@ -34,9 +34,8 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx.h"
 #include "stm32h7xx_it.h"
-
+#include "./sai/bsp_sai.h" 
 /* USER CODE BEGIN 0 */
-
 extern SD_HandleTypeDef uSdHandle;
 /* USER CODE END 0 */
 
@@ -183,7 +182,14 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32h7xx.s).                    */
 /******************************************************************************/
-
+void DMA1_Stream2_IRQHandler(void)
+{
+  SAI_TX_DMA_STREAM_IRQFUN();
+}
+void DMA1_Stream3_IRQHandler(void)
+{
+  SAI_RX_DMA_STREAM_IRQFUN();
+}
 /* USER CODE BEGIN 1 */
 void SDMMC1_IRQHandler(void)
 {

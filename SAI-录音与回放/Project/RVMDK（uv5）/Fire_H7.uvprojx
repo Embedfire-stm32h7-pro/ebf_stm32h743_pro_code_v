@@ -837,6 +837,31 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\key\bsp_key.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_wm8978.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\wm8978\bsp_wm8978.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_touchpad.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\touch_pad\bsp_touchpad.c</FilePath>
+            </File>
+            <File>
+              <FileName>Recorder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\Recorder\Recorder.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\i2c\i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sai.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\sai\bsp_sai.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

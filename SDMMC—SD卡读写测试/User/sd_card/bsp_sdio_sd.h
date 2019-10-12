@@ -1,5 +1,5 @@
-#ifndef __STM324x9I_EVAL_SDIO_SD_H
-#define __STM324x9I_EVAL_SDIO_SD_H
+#ifndef __STM32H743_SDIO_SD_H
+#define __STM32H743_SDIO_SD_H
 
 #include "stm32h7xx.h"
 //µÈ´ýÊ±¼ä
@@ -12,8 +12,8 @@
 #define MULTI_BUFFER_SIZE    (BLOCK_SIZE * NUMBER_OF_BLOCKS)
 
 
-static void BSP_SD_MspInit(void);
-static HAL_StatusTypeDef BSP_SD_Init(void);
+void BSP_SD_MspInit(void);
+HAL_StatusTypeDef BSP_SD_Init(void);
 static void SD_EraseTest(void);
 static HAL_StatusTypeDef Wait_SDCARD_Ready(void);
 static HAL_StatusTypeDef Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t BufferLength);

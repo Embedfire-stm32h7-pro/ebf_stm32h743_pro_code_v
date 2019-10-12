@@ -2,6 +2,8 @@
   ******************************************************************************
   * @file    stm32h7xx_hal_dac_ex.c
   * @author  MCD Application Team
+  * @version V1.2.0
+  * @date   29-December-2017
   * @brief   Extended DAC HAL module driver.
   *         This file provides firmware functions to manage the extended 
   *         functionalities of DAC peripheral.
@@ -28,16 +30,32 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * Redistribution and use in source and binary forms, with or without modification,
+  * are permitted provided that the following conditions are met:
+  *   1. Redistributions of source code must retain the above copyright notice,
+  *      this list of conditions and the following disclaimer.
+  *   2. Redistributions in binary form must reproduce the above copyright notice,
+  *      this list of conditions and the following disclaimer in the documentation
+  *      and/or other materials provided with the distribution.
+  *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  *      may be used to endorse or promote products derived from this software
+  *      without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */
+  */ 
 
 
 /* Includes ------------------------------------------------------------------*/
@@ -87,13 +105,13 @@
 
 /**
   * @brief  Enable or disable the selected DAC channel wave generation.
-  * @param  hdac pointer to a DAC_HandleTypeDef structure that contains
+  * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
   *         the configuration information for the specified DAC.
-  * @param  Channel The selected DAC channel. 
+  * @param  Channel: The selected DAC channel. 
   *          This parameter can be one of the following values:
   *            @arg DAC_CHANNEL_1: DAC Channel1 selected 
   *            @arg DAC_CHANNEL_2: DAC Channel2 selected
-  * @param  Amplitude Select max triangle amplitude. 
+  * @param  Amplitude: Select max triangle amplitude. 
   *          This parameter can be one of the following values:
   *            @arg DAC_TRIANGLEAMPLITUDE_1: Select max triangle amplitude of 1
   *            @arg DAC_TRIANGLEAMPLITUDE_3: Select max triangle amplitude of 3
@@ -122,7 +140,7 @@ HAL_StatusTypeDef HAL_DACEx_TriangleWaveGenerate(DAC_HandleTypeDef* hdac, uint32
   hdac->State = HAL_DAC_STATE_BUSY;
   
   /* Enable the triangle wave generation for the selected DAC channel */
-  MODIFY_REG(hdac->Instance->CR, ((DAC_CR_WAVE1) | (DAC_CR_MAMP1)) << (Channel & 0x10UL), (DAC_CR_WAVE1_1 | Amplitude) << (Channel & 0x10UL));
+  MODIFY_REG(hdac->Instance->CR, ((DAC_CR_WAVE1)|(DAC_CR_MAMP1))<<Channel, (DAC_CR_WAVE1_1 | Amplitude) << Channel);
   
   /* Change DAC state */
   hdac->State = HAL_DAC_STATE_READY;
@@ -136,13 +154,13 @@ HAL_StatusTypeDef HAL_DACEx_TriangleWaveGenerate(DAC_HandleTypeDef* hdac, uint32
 
 /**
   * @brief  Enable or disable the selected DAC channel wave generation.
-  * @param  hdac pointer to a DAC_HandleTypeDef structure that contains
+  * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
   *         the configuration information for the specified DAC. 
-  * @param  Channel The selected DAC channel. 
+  * @param  Channel: The selected DAC channel. 
   *          This parameter can be one of the following values:
   *            @arg DAC_CHANNEL_1: DAC Channel1 selected 
   *            @arg DAC_CHANNEL_2: DAC Channel2 selected
-  * @param  Amplitude Unmask DAC channel LFSR for noise wave generation. 
+  * @param  Amplitude: Unmask DAC channel LFSR for noise wave generation. 
   *          This parameter can be one of the following values: 
   *            @arg DAC_LFSRUNMASK_BIT0: Unmask DAC channel LFSR bit0 for noise wave generation
   *            @arg DAC_LFSRUNMASK_BITS1_0: Unmask DAC channel LFSR bit[1:0] for noise wave generation  
@@ -171,7 +189,7 @@ HAL_StatusTypeDef HAL_DACEx_NoiseWaveGenerate(DAC_HandleTypeDef* hdac, uint32_t 
   hdac->State = HAL_DAC_STATE_BUSY;
      
   /* Enable the noise wave generation for the selected DAC channel */
-  MODIFY_REG(hdac->Instance->CR, ((DAC_CR_WAVE1) | (DAC_CR_MAMP1)) << (Channel & 0x10UL), (DAC_CR_WAVE1_0 | Amplitude) << (Channel & 0x10UL));
+  MODIFY_REG(hdac->Instance->CR, ((DAC_CR_WAVE1)|(DAC_CR_MAMP1))<<Channel, (DAC_CR_WAVE1_0 | Amplitude) << Channel);
   
   /* Change DAC state */
   hdac->State = HAL_DAC_STATE_READY;
@@ -187,22 +205,22 @@ HAL_StatusTypeDef HAL_DACEx_NoiseWaveGenerate(DAC_HandleTypeDef* hdac, uint32_t 
 
 /**
   * @brief  Set the specified data holding register value for dual DAC channel.
-  * @param  hdac pointer to a DAC_HandleTypeDef structure that contains
+  * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
   *               the configuration information for the specified DAC.
-  * @param  Alignment Specifies the data alignment for dual channel DAC.
+  * @param  Alignment: Specifies the data alignment for dual channel DAC.
   *          This parameter can be one of the following values:
   *            DAC_ALIGN_8B_R: 8bit right data alignment selected
   *            DAC_ALIGN_12B_L: 12bit left data alignment selected
   *            DAC_ALIGN_12B_R: 12bit right data alignment selected
-  * @param  Data1 Data for DAC Channel1 to be loaded in the selected data holding register.
-  * @param  Data2 Data for DAC Channel2 to be loaded in the selected data  holding register.
+  * @param  Data1: Data for DAC Channel2 to be loaded in the selected data holding register.
+  * @param  Data2: Data for DAC Channel1 to be loaded in the selected data  holding register.
   * @note   In dual mode, a unique register access is required to write in both
   *          DAC channels at the same time.
   * @retval HAL status
   */
 HAL_StatusTypeDef HAL_DACEx_DualSetValue(DAC_HandleTypeDef* hdac, uint32_t Alignment, uint32_t Data1, uint32_t Data2)
 {  
-  uint32_t data, tmp ;
+  uint32_t data = 0, tmp = 0;
   
   /* Check the parameters */
   assert_param(IS_DAC_ALIGN(Alignment));
@@ -212,11 +230,11 @@ HAL_StatusTypeDef HAL_DACEx_DualSetValue(DAC_HandleTypeDef* hdac, uint32_t Align
   /* Calculate and set dual DAC data holding register value */
   if (Alignment == DAC_ALIGN_8B_R)
   {
-    data = ((uint32_t)Data2 << 8U) | Data1; 
+    data = ((uint32_t)Data2 << 8) | Data1; 
   }
   else
   {
-    data = ((uint32_t)Data2 << 16U) | Data1;
+    data = ((uint32_t)Data2 << 16) | Data1;
   }
   
   tmp = (uint32_t)hdac->Instance;
@@ -231,7 +249,7 @@ HAL_StatusTypeDef HAL_DACEx_DualSetValue(DAC_HandleTypeDef* hdac, uint32_t Align
 
 /**
   * @brief  Conversion complete callback in non-blocking mode for Channel2. 
-  * @param  hdac pointer to a DAC_HandleTypeDef structure that contains
+  * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
   *         the configuration information for the specified DAC.
   * @retval None
   */
@@ -247,7 +265,7 @@ __weak void HAL_DACEx_ConvCpltCallbackCh2(DAC_HandleTypeDef* hdac)
 
 /**
   * @brief  Conversion half DMA transfer callback in non-blocking mode for Channel2. 
-  * @param  hdac pointer to a DAC_HandleTypeDef structure that contains
+  * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
   *         the configuration information for the specified DAC.
   * @retval None
   */
@@ -263,7 +281,7 @@ __weak void HAL_DACEx_ConvHalfCpltCallbackCh2(DAC_HandleTypeDef* hdac)
 
 /**
   * @brief  Error DAC callback for Channel2.
-  * @param  hdac pointer to a DAC_HandleTypeDef structure that contains
+  * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
   *         the configuration information for the specified DAC.
   * @retval None
   */
@@ -279,7 +297,7 @@ __weak void HAL_DACEx_ErrorCallbackCh2(DAC_HandleTypeDef *hdac)
 
 /**
   * @brief  DMA underrun DAC callback for channel2.
-  * @param  hdac pointer to a DAC_HandleTypeDef structure that contains
+  * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
   *         the configuration information for the specified DAC.
   * @retval None
   */
@@ -296,10 +314,10 @@ __weak void HAL_DACEx_DMAUnderrunCallbackCh2(DAC_HandleTypeDef *hdac)
 
 /**
   * @brief  Run the self calibration of one DAC channel.
-  * @param  hdac pointer to a DAC_HandleTypeDef structure that contains
+  * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
   *         the configuration information for the specified DAC.
-  * @param  sConfig DAC channel configuration structure.
-  * @param  Channel The selected DAC channel. 
+  * @param  sConfig: DAC channel configuration structure.
+  * @param  Channel: The selected DAC channel. 
   *          This parameter can be one of the following values:
   *            @arg DAC_CHANNEL_1: DAC Channel1 selected
   *            @arg DAC_CHANNEL_2: DAC Channel2 selected
@@ -313,22 +331,18 @@ HAL_StatusTypeDef HAL_DACEx_SelfCalibrate (DAC_HandleTypeDef* hdac, DAC_ChannelC
   HAL_StatusTypeDef status = HAL_OK;
    
   __IO uint32_t tmp = 0;
-  uint32_t trimmingvalue ;
+  uint32_t trimmingvalue = 0;
   uint32_t delta;
   
   /* store/restore channel configuration structure purpose */
-  uint32_t oldmodeconfiguration ;
+  uint32_t oldmodeconfiguration = 0;
   
   /* Check the parameters */
   assert_param(IS_DAC_CHANNEL(Channel));
     
  /* Check the DAC handle allocation */
-  /* Check if DAC running */
-  if (hdac == NULL)
-  {
-    status = HAL_ERROR;
-  }
-  else if (hdac->State == HAL_DAC_STATE_BUSY)
+ /* Check if DAC running */
+  if((hdac == NULL) || (hdac->State == HAL_DAC_STATE_BUSY))
   {
     status = HAL_ERROR;
   }
@@ -338,17 +352,17 @@ HAL_StatusTypeDef HAL_DACEx_SelfCalibrate (DAC_HandleTypeDef* hdac, DAC_ChannelC
     __HAL_LOCK(hdac);
 
     /* Store configuration */
-    oldmodeconfiguration = (hdac->Instance->MCR & (DAC_MCR_MODE1 << (Channel & 0x10UL)));
+    oldmodeconfiguration = (hdac->Instance->MCR & (DAC_MCR_MODE1 << Channel));
 
     /* Disable the selected DAC channel */
-    CLEAR_BIT((hdac->Instance->CR), (DAC_CR_EN1 << (Channel & 0x10UL)));
+    CLEAR_BIT ((hdac->Instance->CR), (DAC_CR_EN1 << Channel));
 
     /* Set mode in MCR  for calibration */
-    MODIFY_REG(hdac->Instance->MCR, (DAC_MCR_MODE1 << (Channel & 0x10UL)), 0U);
+     MODIFY_REG(hdac->Instance->MCR, (DAC_MCR_MODE1 << Channel), 0);
  
     /* Set DAC Channel1 DHR register to the middle value */
-    tmp = (uint32_t)hdac->Instance; 
 
+    tmp = (uint32_t)hdac->Instance; 
     if(Channel == DAC_CHANNEL_1)
     {
       tmp += DAC_DHR12R1_ALIGNMENT(DAC_ALIGN_12B_R);
@@ -357,26 +371,26 @@ HAL_StatusTypeDef HAL_DACEx_SelfCalibrate (DAC_HandleTypeDef* hdac, DAC_ChannelC
     {
       tmp += DAC_DHR12R2_ALIGNMENT(DAC_ALIGN_12B_R);
     }
-    *(__IO uint32_t *) tmp = 0x0800U;
+    *(__IO uint32_t *) tmp = 0x0800;
  
     /* Enable the selected DAC channel calibration */
     /* i.e. set DAC_CR_CENx bit */ 
-    SET_BIT((hdac->Instance->CR), (DAC_CR_CEN1 << (Channel & 0x10UL)));
+    SET_BIT ((hdac->Instance->CR), (DAC_CR_CEN1 << Channel));
  
     /* Init trimming counter */    
     /* Medium value */
-    trimmingvalue = 16U; 
-    delta = 8U;
-    while (delta != 0U) 
+    trimmingvalue = 16; 
+    delta = 8;
+    while (delta != 0) 
     {
       /* Set candidate trimming */
-      MODIFY_REG(hdac->Instance->CCR, (DAC_CCR_OTRIM1 << (Channel & 0x10UL)), (trimmingvalue << (Channel & 0x10UL)));
+      MODIFY_REG(hdac->Instance->CCR, (DAC_CCR_OTRIM1<<Channel), (trimmingvalue<<Channel));
 
       /* tOFFTRIMmax delay x ms as per datasheet (electrical characteristics */ 
       /* i.e. minimum time needed between two calibration steps */
       HAL_Delay(1);
    
-      if ((hdac->Instance->SR & (DAC_SR_CAL_FLAG1 << (Channel & 0x10UL))) == (DAC_SR_CAL_FLAG1 << (Channel & 0x10UL)))
+      if ((hdac->Instance->SR & (DAC_SR_CAL_FLAG1<<Channel)) == (DAC_SR_CAL_FLAG1<<Channel))
       { 
         /* DAC_SR_CAL_FLAGx is HIGH try higher trimming */
         trimmingvalue -= delta;
@@ -387,35 +401,35 @@ HAL_StatusTypeDef HAL_DACEx_SelfCalibrate (DAC_HandleTypeDef* hdac, DAC_ChannelC
          trimmingvalue += delta;
 
       }                   
-      delta >>= 1U;    
+      delta >>= 1;    
     }
 
     /* Still need to check if right calibration is current value or one step below */
     /* Indeed the first value that causes the DAC_SR_CAL_FLAGx bit to change from 0 to 1  */
     /* Set candidate trimming */
-    MODIFY_REG(hdac->Instance->CCR, (DAC_CCR_OTRIM1 << (Channel & 0x10UL)), (trimmingvalue << (Channel & 0x10UL)));
+    MODIFY_REG(hdac->Instance->CCR, (DAC_CCR_OTRIM1<<Channel), (trimmingvalue<<Channel));
 
     /* tOFFTRIMmax delay x ms as per datasheet (electrical characteristics */ 
     /* i.e. minimum time needed between two calibration steps */
-    HAL_Delay(1U);
+    HAL_Delay(1);
 
-    if ((hdac->Instance->SR & (DAC_SR_CAL_FLAG1 << (Channel & 0x10UL))) == 0UL)
+    if (!(hdac->Instance->SR & (DAC_SR_CAL_FLAG1<<Channel)))
     { 
       /* Trimming is actually one value more */
       trimmingvalue ++;
       /* Set right trimming */
-      MODIFY_REG(hdac->Instance->CCR, (DAC_CCR_OTRIM1 << (Channel & 0x10UL)), (trimmingvalue << (Channel & 0x10UL)));
+      MODIFY_REG(hdac->Instance->CCR, (DAC_CCR_OTRIM1<<Channel), (trimmingvalue<<Channel));
     }
  
     /* Disable the selected DAC channel calibration */
     /* i.e. clear DAC_CR_CENx bit */
-    CLEAR_BIT((hdac->Instance->CR), (DAC_CR_CEN1 << (Channel & 0x10UL)));
+    CLEAR_BIT ((hdac->Instance->CR), (DAC_CR_CEN1 << Channel));
     
     sConfig->DAC_TrimmingValue = trimmingvalue;
     sConfig->DAC_UserTrimming = DAC_TRIMMING_USER;
     
     /* Restore configuration */
-    MODIFY_REG(hdac->Instance->MCR, (DAC_MCR_MODE1 << (Channel & 0x10UL)), oldmodeconfiguration);
+    MODIFY_REG(hdac->Instance->MCR, (DAC_MCR_MODE1 << Channel), oldmodeconfiguration);
 
     /* Process unlocked */
     __HAL_UNLOCK(hdac);
@@ -430,14 +444,14 @@ HAL_StatusTypeDef HAL_DACEx_SelfCalibrate (DAC_HandleTypeDef* hdac, DAC_ChannelC
 
 /**
   * @brief  Set the trimming mode and trimming value (user trimming mode applied). 
-  * @param  hdac pointer to a DAC_HandleTypeDef structure that contains
+  * @param  hdac: pointer to a DAC_HandleTypeDef structure that contains
   *         the configuration information for the specified DAC.
-  * @param  sConfig DAC configuration structure updated with new DAC trimming value.
-  * @param  Channel The selected DAC channel. 
+  * @param  sConfig: DAC configuration structure updated with new DAC trimming value.
+  * @param  Channel: The selected DAC channel. 
   *          This parameter can be one of the following values:
   *            @arg DAC_CHANNEL_1: DAC Channel1 selected
   *            @arg DAC_CHANNEL_2: DAC Channel2 selected
-  * @param  NewTrimmingValue DAC new trimming value
+  * @param  NewTrimmingValue: DAC new trimming value
   * @retval HAL status
   */
 
@@ -461,7 +475,7 @@ HAL_StatusTypeDef HAL_DACEx_SetUserTrimming (DAC_HandleTypeDef* hdac, DAC_Channe
     __HAL_LOCK(hdac);
 
     /* Set new trimming */
-    MODIFY_REG(hdac->Instance->CCR, (DAC_CCR_OTRIM1 << (Channel & 0x10UL)), (NewTrimmingValue << (Channel & 0x10UL)));
+    MODIFY_REG(hdac->Instance->CCR, (DAC_CCR_OTRIM1<<Channel), (NewTrimmingValue<<Channel));
 
     /* Update trimming mode */
     sConfig->DAC_UserTrimming = DAC_TRIMMING_USER;
@@ -477,8 +491,8 @@ HAL_StatusTypeDef HAL_DACEx_SetUserTrimming (DAC_HandleTypeDef* hdac, DAC_Channe
 
 /**
   * @brief  Return the DAC trimming value.
-  * @param  hdac  DAC handle
-  * @param  Channel The selected DAC channel. 
+  * @param  hdac : DAC handle
+  * @param  Channel: The selected DAC channel. 
   *          This parameter can be one of the following values:
   *            @arg DAC_CHANNEL_1: DAC Channel1 selected
   *            @arg DAC_CHANNEL_2: DAC Channel2 selected
@@ -487,15 +501,25 @@ HAL_StatusTypeDef HAL_DACEx_SetUserTrimming (DAC_HandleTypeDef* hdac, DAC_Channe
  */
 
 uint32_t HAL_DACEx_GetTrimOffset (DAC_HandleTypeDef *hdac, uint32_t Channel)
-{  
-  /* Check the parameter */
-  assert_param(IS_DAC_CHANNEL(Channel));
+{
+  uint32_t trimmingvalue = 0;
+  
+  /* Check the DAC handle allocation */
+  /* And not in Reset state */
+  if((hdac == NULL) || (hdac->State == HAL_DAC_STATE_RESET))
+  {
+    return HAL_ERROR;
+  }
+  else
+  {
+    /* Check the parameter */
+    assert_param(IS_DAC_CHANNEL(Channel));
 
-  /* Retrieve trimming  */
-  return ((hdac->Instance->CCR & (DAC_CCR_OTRIM1 << (Channel & 0x10UL))) >> (Channel & 0x10UL));
-
+    /* Retrieve trimming  */
+    trimmingvalue = ((hdac->Instance->CCR & (DAC_CCR_OTRIM1 << Channel)) >> Channel);
+  }  
+  return trimmingvalue;
 }
-
 /**
   * @}
   */
@@ -524,11 +548,11 @@ uint32_t HAL_DACEx_GetTrimOffset (DAC_HandleTypeDef *hdac, uint32_t Channel)
   */
 uint32_t HAL_DACEx_DualGetValue(DAC_HandleTypeDef* hdac)
 {
-  uint32_t tmp = 0U;
+  uint32_t tmp = 0;
   
   tmp |= hdac->Instance->DOR1;
 
-  tmp |= hdac->Instance->DOR2 << 16U;
+  tmp |= hdac->Instance->DOR2 << 16;
   
   /* Returns the DAC channel data output register value */
   return tmp;
@@ -547,43 +571,35 @@ uint32_t HAL_DACEx_DualGetValue(DAC_HandleTypeDef* hdac)
 
 /**
   * @brief  DMA conversion complete callback. 
-  * @param  hdma pointer to a DMA_HandleTypeDef structure that contains
+  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
   *                the configuration information for the specified DMA module.
   * @retval None
   */
 void DAC_DMAConvCpltCh2(DMA_HandleTypeDef *hdma)   
 {
   DAC_HandleTypeDef* hdac = ( DAC_HandleTypeDef* )((DMA_HandleTypeDef* )hdma)->Parent;
-#if (USE_HAL_DAC_REGISTER_CALLBACKS == 1)
-  hdac->ConvCpltCallbackCh2(hdac);
-#else  
+  
   HAL_DACEx_ConvCpltCallbackCh2(hdac); 
-#endif /* USE_HAL_DAC_REGISTER_CALLBACKS */ 
- 
+  
   hdac->State= HAL_DAC_STATE_READY;
 }
 
 /**
   * @brief  DMA half transfer complete callback. 
-  * @param  hdma pointer to a DMA_HandleTypeDef structure that contains
+  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
   *                the configuration information for the specified DMA module.
   * @retval None
   */
 void DAC_DMAHalfConvCpltCh2(DMA_HandleTypeDef *hdma)   
 {
     DAC_HandleTypeDef* hdac = ( DAC_HandleTypeDef* )((DMA_HandleTypeDef* )hdma)->Parent;
-    
-	/* Conversion complete callback */
-#if (USE_HAL_DAC_REGISTER_CALLBACKS == 1)
-  hdac->ConvHalfCpltCallbackCh2(hdac);
-#else
-    HAL_DACEx_ConvHalfCpltCallbackCh2(hdac);
-#endif /* USE_HAL_DAC_REGISTER_CALLBACKS */
+    /* Conversion complete callback */
+    HAL_DACEx_ConvHalfCpltCallbackCh2(hdac); 
 }
 
 /**
   * @brief  DMA error callback. 
-  * @param  hdma pointer to a DMA_HandleTypeDef structure that contains
+  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
   *                the configuration information for the specified DMA module.
   * @retval None
   */
@@ -593,12 +609,9 @@ void DAC_DMAErrorCh2(DMA_HandleTypeDef *hdma)
     
   /* Set DAC error code to DMA error */
   hdac->ErrorCode |= HAL_DAC_ERROR_DMA;
-
-#if (USE_HAL_DAC_REGISTER_CALLBACKS == 1)
-  hdac->ErrorCallbackCh2(hdac);
-#else  
+    
   HAL_DACEx_ErrorCallbackCh2(hdac); 
-#endif /* USE_HAL_DAC_REGISTER_CALLBACKS */   
+    
   hdac->State= HAL_DAC_STATE_READY;
 }
 

@@ -36,7 +36,7 @@ int main(void)
 	static float Temp;
 	
   HAL_Init();
-  /* 系统时钟初始化成400 MHz */
+  /* 系统时钟初始化成480 MHz */
   SystemClock_Config();
   
   /* LED 端口初始化 */
@@ -81,16 +81,16 @@ int main(void)
   * @brief  System Clock 配置
   *         system Clock 配置如下: 
 	*            System Clock source  = PLL (HSE)
-	*            SYSCLK(Hz)           = 400000000 (CPU Clock)
-	*            HCLK(Hz)             = 200000000 (AXI and AHBs Clock)
+	*            SYSCLK(Hz)           = 480000000 (CPU Clock)
+	*            HCLK(Hz)             = 240000000 (AXI and AHBs Clock)
 	*            AHB Prescaler        = 2
-	*            D1 APB3 Prescaler    = 2 (APB3 Clock  100MHz)
-	*            D2 APB1 Prescaler    = 2 (APB1 Clock  100MHz)
-	*            D2 APB2 Prescaler    = 2 (APB2 Clock  100MHz)
-	*            D3 APB4 Prescaler    = 2 (APB4 Clock  100MHz)
+	*            D1 APB3 Prescaler    = 2 (APB3 Clock  120MHz)
+	*            D2 APB1 Prescaler    = 2 (APB1 Clock  120MHz)
+	*            D2 APB2 Prescaler    = 2 (APB2 Clock  120MHz)
+	*            D3 APB4 Prescaler    = 2 (APB4 Clock  120MHz)
 	*            HSE Frequency(Hz)    = 25000000
 	*            PLL_M                = 5
-	*            PLL_N                = 160
+	*            PLL_N                = 192
 	*            PLL_P                = 2
 	*            PLL_Q                = 4
 	*            PLL_R                = 2

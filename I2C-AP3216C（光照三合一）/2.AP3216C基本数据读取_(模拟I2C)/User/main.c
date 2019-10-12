@@ -38,7 +38,7 @@ int main(void)
   float ALSValue;
   
   HAL_Init();        
-  /* 配置系统时钟为400 MHz */ 
+  /* 配置系统时钟为480 MHz */ 
   SystemClock_Config();
   /* 打开ICache */ 
   SCB_EnableICache();
@@ -77,16 +77,16 @@ int main(void)
   * @brief  System Clock 配置
   *         system Clock 配置如下: 
 	*            System Clock source  = PLL (HSE)
-	*            SYSCLK(Hz)           = 400000000 (CPU Clock)
-	*            HCLK(Hz)             = 200000000 (AXI and AHBs Clock)
+	*            SYSCLK(Hz)           = 480000000 (CPU Clock)
+	*            HCLK(Hz)             = 240000000 (AXI and AHBs Clock)
 	*            AHB Prescaler        = 2
-	*            D1 APB3 Prescaler    = 2 (APB3 Clock  100MHz)
-	*            D2 APB1 Prescaler    = 2 (APB1 Clock  100MHz)
-	*            D2 APB2 Prescaler    = 2 (APB2 Clock  100MHz)
-	*            D3 APB4 Prescaler    = 2 (APB4 Clock  100MHz)
+	*            D1 APB3 Prescaler    = 2 (APB3 Clock  120MHz)
+	*            D2 APB1 Prescaler    = 2 (APB1 Clock  120MHz)
+	*            D2 APB2 Prescaler    = 2 (APB2 Clock  120MHz)
+	*            D3 APB4 Prescaler    = 2 (APB4 Clock  120MHz)
 	*            HSE Frequency(Hz)    = 25000000
 	*            PLL_M                = 5
-	*            PLL_N                = 160
+	*            PLL_N                = 192
 	*            PLL_P                = 2
 	*            PLL_Q                = 4
 	*            PLL_R                = 2
@@ -119,7 +119,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
 
   RCC_OscInitStruct.PLL.PLLM = 5;
-  RCC_OscInitStruct.PLL.PLLN = 160;
+  RCC_OscInitStruct.PLL.PLLN = 192;
   RCC_OscInitStruct.PLL.PLLP = 2;
   RCC_OscInitStruct.PLL.PLLR = 2;
   RCC_OscInitStruct.PLL.PLLQ = 4;

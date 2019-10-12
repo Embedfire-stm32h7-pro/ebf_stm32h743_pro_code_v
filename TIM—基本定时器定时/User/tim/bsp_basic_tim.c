@@ -48,13 +48,13 @@ static void TIMx_Configuration(void)
      
     TIM_Base.Instance = BASIC_TIM;
     /* 累计 TIM_Period个后产生一个更新或者中断*/		
-    //当定时器从0计数到4999，即为5000次，为一个定时周期
-    TIM_Base.Init.Period = 5000 - 1;
+    //当定时器从0计数到10000-1，即为10000次，为一个定时周期
+    TIM_Base.Init.Period = 10000 - 1;
     //定时器时钟源TIMxCLK = 2 * PCLK1  
     //				PCLK1 = HCLK / 4 
-    //				=> TIMxCLK=HCLK/2=SystemCoreClock/2=200MHz
+    //				=> TIMxCLK=HCLK/2=SystemCoreClock/2=240MHz
     // 设定定时器频率为=TIMxCLK/(TIM_Prescaler+1)=10000Hz
-    TIM_Base.Init.Prescaler =  20000 - 1;
+    TIM_Base.Init.Prescaler =  240000 - 1;
     // 初始化定时器TIM
     HAL_TIM_Base_Init(&TIM_Base);
     // 开启定时器更新中断

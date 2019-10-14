@@ -54,7 +54,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>0</BrowseInformation>
+          <BrowseInformation>1</BrowseInformation>
           <ListingPath>..\..\Listing\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -528,11 +528,6 @@
               <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_gpio.c</FilePath>
             </File>
             <File>
-              <FileName>stm32h7xx_hal_hash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hash.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32h7xx_hal_hash_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hash_ex.c</FilePath>
@@ -541,6 +536,11 @@
               <FileName>stm32h7xx_hal_hcd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_hash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hash.c</FilePath>
             </File>
             <File>
               <FileName>stm32h7xx_hal_hrtim.c</FileName>

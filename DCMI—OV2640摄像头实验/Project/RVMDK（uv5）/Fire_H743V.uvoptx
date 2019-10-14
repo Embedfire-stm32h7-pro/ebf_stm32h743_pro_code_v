@@ -571,8 +571,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hash.c</PathWithFileName>
-      <FilenameWithoutPath>stm32h7xx_hal_hash.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hash_ex.c</PathWithFileName>
+      <FilenameWithoutPath>stm32h7xx_hal_hash_ex.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -583,8 +583,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hash_ex.c</PathWithFileName>
-      <FilenameWithoutPath>stm32h7xx_hal_hash_ex.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hcd.c</PathWithFileName>
+      <FilenameWithoutPath>stm32h7xx_hal_hcd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -595,8 +595,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hcd.c</PathWithFileName>
-      <FilenameWithoutPath>stm32h7xx_hal_hcd.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\Libraries\STM32H7xx_HAL_Driver\Src\stm32h7xx_hal_hash.c</PathWithFileName>
+      <FilenameWithoutPath>stm32h7xx_hal_hash.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1716,7 +1716,7 @@
       <GroupNumber>4</GroupNumber>
       <FileNumber>123</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\User\camera\bsp_ov2640.c</PathWithFileName>

@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火  STM32 H750 开发板  
+  * 实验平台:野火  STM32 F743 开发板  
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :http://firestm32.taobao.com
   *
@@ -362,6 +362,8 @@ const char OV2640_QQVGA[][2]=
 
 /* OV2640的 SVGA是 600列*800行的，在800列*480行的液晶屏上不能全屏*/
 /* 所以直接用 UXGA 模式，再根据所需的图像窗口裁剪 */
+/* OV2640的 SVGA是 600列*800行的，在800列*480行的液晶屏上不能全屏*/
+/* 所以直接用 UXGA 模式，再根据所需的图像窗口裁剪 */
 const unsigned char OV2640_UXGA[][2]=
 {
   0xff, 0x00,
@@ -371,7 +373,7 @@ const unsigned char OV2640_UXGA[][2]=
   0x3c, 0x32,
   0x11, 0x00,
   0x09, 0x02,
-  0x04, 0xd0,	//水平翻转
+  0x04, 0x20|0x80,	//水平翻转
   0x13, 0xe5,
   0x14, 0x48,
   0x2c, 0x0c,
@@ -585,14 +587,8 @@ const unsigned char OV2640_UXGA[][2]=
   0x99, 0x00,
   0x00, 0x00,
 	
-  0xff, 0x01,
-  0x11, 0x00,
-//  0x12, 0x10,
-//  0x2a, 0x00,
-//  0x2b, 0x00,
-//  0x46, 0x87,
-//  0x47, 0x00,
-//  0x3d, 0x33,//帧率相关，跟0x11组合
+
+  
 //  0xff, 0x00,
 //  0xe0, 0x04,
 //  0xc0, 0xc8,
@@ -611,6 +607,7 @@ const unsigned char OV2640_UXGA[][2]=
 //  0xd3, 0x04,
 //  0xe0, 0x00,
 };
+
 
 const unsigned char OV2640_JPEG_INIT[][2]=
 {
@@ -1008,6 +1005,7 @@ const unsigned char OV2640_352x288_JPEG[][2]=
   0xe0, 0x00,
 };
 
+
 /**
   * @brief  初始化控制摄像头使用的GPIO(I2C/DCMI)
   * @param  None
@@ -1035,7 +1033,7 @@ void OV2640_HW_Init(void)
     /*控制/同步信号线*/
     GPIO_InitStructure.Pin = DCMI_VSYNC_GPIO_PIN;
     GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStructure.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStructure.Pull = GPIO_PULLUP ;
     GPIO_InitStructure.Alternate = DCMI_VSYNC_AF;
     HAL_GPIO_Init(DCMI_VSYNC_GPIO_PORT, &GPIO_InitStructure);
@@ -1089,6 +1087,7 @@ void OV2640_HW_Init(void)
     HAL_GPIO_WritePin(DCMI_PWDN_GPIO_PORT,DCMI_PWDN_GPIO_PIN,GPIO_PIN_RESET);
     
 }
+
 /**
   * @brief  Resets the OV2640 camera.
   * @param  None
@@ -1143,11 +1142,11 @@ void OV2640_Init(void)
 	HAL_DCMI_Init(&DCMI_Handle); 	
 
 	/* 配置中断 */
-	HAL_NVIC_SetPriority(DCMI_IRQn, 0 ,5);
+	HAL_NVIC_SetPriority(DCMI_IRQn, 5, 0);
 	HAL_NVIC_EnableIRQ(DCMI_IRQn); 	
-
+	
 	//开始传输，数据大小以32位数据为单位(即像素个数/4，LCD_GetXSize()*LCD_GetYSize()*2/4) 
-	OV2640_DMA_Config(LCD_FB_START_ADDRESS, LCD_GetXSize()*LCD_GetYSize()/2);
+	OV2640_DMA_Config(LCD_FB_START_ADDRESS,LCD_GetXSize()*LCD_GetYSize()/2);
 }
 
 /**
@@ -1157,32 +1156,36 @@ void OV2640_Init(void)
   */
 void OV2640_DMA_Config(uint32_t DMA_Memory0BaseAddr,uint32_t DMA_BufferSize)
 {
-  /* 配置DMA从DCMI中获取数据*/
+
+/* 配置DMA从DCMI中获取数据*/
   /* 使能DMA*/
   __HAL_RCC_DMA2_CLK_ENABLE(); 
   DMA_Handle_dcmi.Instance = DMA2_Stream1;
-  DMA_Handle_dcmi.Init.Request = DMA_REQUEST_DCMI;
+  DMA_Handle_dcmi.Init.Request = DMA_REQUEST_DCMI; 
   DMA_Handle_dcmi.Init.Direction = DMA_PERIPH_TO_MEMORY;
   DMA_Handle_dcmi.Init.PeriphInc = DMA_PINC_DISABLE;
   DMA_Handle_dcmi.Init.MemInc = DMA_MINC_ENABLE;			//寄存器地址自增
   DMA_Handle_dcmi.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
   DMA_Handle_dcmi.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
   DMA_Handle_dcmi.Init.Mode = DMA_CIRCULAR;								//循环模式
-  DMA_Handle_dcmi.Init.Priority = DMA_PRIORITY_VERY_HIGH;
-  DMA_Handle_dcmi.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
+  DMA_Handle_dcmi.Init.Priority = DMA_PRIORITY_HIGH;
+  DMA_Handle_dcmi.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
   DMA_Handle_dcmi.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
-  DMA_Handle_dcmi.Init.MemBurst = DMA_MBURST_INC8;
+  DMA_Handle_dcmi.Init.MemBurst = DMA_MBURST_SINGLE;
   DMA_Handle_dcmi.Init.PeriphBurst = DMA_PBURST_SINGLE;
-	
-	HAL_DMA_Init(&DMA_Handle_dcmi);
+
+
   /*DMA中断配置 */
   __HAL_LINKDMA(&DCMI_Handle, DMA_Handle, DMA_Handle_dcmi);
   
-  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
-
+  
+  HAL_DMA_Init(&DMA_Handle_dcmi);
+  
   //使能DCMI采集数据
   HAL_DCMI_Start_DMA(&DCMI_Handle, DCMI_MODE_CONTINUOUS, (uint32_t)DMA_Memory0BaseAddr,DMA_BufferSize);
+
 }
 
 /**
@@ -1204,6 +1207,7 @@ void OV2640_QQVGAConfig(void)
     Delay(2);
   }
 }
+
 
 /**
   * @brief  设置图像输出大小，OV2640输出图像的大小(分辨率),完全由该函数确定
@@ -1340,21 +1344,22 @@ void OV2640_UXGAConfig(void)
 		OV2640_WriteReg(OV2640_UXGA[i][0], OV2640_UXGA[i][1]);
 
 	}
-//	/* Initialize OV2640 */
-//	for(i=0; i<(sizeof(OV2640_UXGA)/2); i++)
-//	{
-//		OV2640_WriteReg(OV2640_UXGA[i][0], OV2640_UXGA[i][1]);
+	/* Initialize OV2640 */
+	for(i=0; i<(sizeof(OV2640_UXGA)/2); i++)
+	{
+		OV2640_WriteReg(OV2640_UXGA[i][0], OV2640_UXGA[i][1]);
 
-//	}
-//	  /* Initialize OV2640 */
-//	for(i=0; i<(sizeof(OV2640_UXGA)/2); i++)
-//	{
-//		OV2640_WriteReg(OV2640_UXGA[i][0], OV2640_UXGA[i][1]);
+	}
+	  /* Initialize OV2640 */
+	for(i=0; i<(sizeof(OV2640_UXGA)/2); i++)
+	{
+		OV2640_WriteReg(OV2640_UXGA[i][0], OV2640_UXGA[i][1]);
 
-//	}	
+	}	
 	/*设置输出的图像大小*/
 	OV2640_OutSize_Set(img_width,img_height);   
 }
+
 
 /**
   * @brief  Configures the OV2640 camera in JPEG mode.
@@ -1492,6 +1497,7 @@ void OV2640_LightMode(uint8_t mode)
 
   }
 }
+
 
 /**
   * @brief  特殊效果

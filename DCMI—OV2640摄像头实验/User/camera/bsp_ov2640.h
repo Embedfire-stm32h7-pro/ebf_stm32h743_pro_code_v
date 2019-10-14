@@ -35,7 +35,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx.h"
 #include "./lcd/bsp_lcd.h"
-
+#include "stm32h7xx_hal.h"
 
 extern DCMI_HandleTypeDef DCMI_Handle;
 
@@ -46,7 +46,7 @@ extern DCMI_HandleTypeDef DCMI_Handle;
 
 /* Exported constants --------------------------------------------------------*/
 #define DCMI_DR_ADDRESS       0x50050028
-
+#define FSMC_LCD_ADDRESS      LCD_FRAME_BUFFER
 
 typedef unsigned char  u8;
 typedef unsigned short u16;
@@ -199,10 +199,10 @@ typedef struct
    the read/write functions will be aborted and return error code (0xFF).
    The period of the delay will depend on the system operating frequency. The following
    value has been set for system running at 168 MHz. */
-#define DCMI_TIMEOUT_MAX               10000
+#define DCMI_TIMEOUT_MAX               27000
 
-//#define OV2640_DEVICE_WRITE_ADDRESS    0x60
-//#define OV2640_DEVICE_READ_ADDRESS     0x61
+#define OV2640_DEVICE_WRITE_ADDRESS    0x60
+#define OV2640_DEVICE_READ_ADDRESS     0x61
 
 /* OV2640 Registers definition when DSP bank selected (0xFF = 0x00) */
 #define OV2640_DSP_R_BYPASS     0x05

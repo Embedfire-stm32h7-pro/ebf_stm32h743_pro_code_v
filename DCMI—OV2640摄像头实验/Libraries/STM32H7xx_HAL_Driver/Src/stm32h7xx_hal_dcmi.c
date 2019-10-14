@@ -171,7 +171,7 @@ static void       DCMI_DMAError(DMA_HandleTypeDef *hdma);
   * @retval HAL status
   */
 HAL_StatusTypeDef HAL_DCMI_Init(DCMI_HandleTypeDef *hdcmi)
-{
+{//5
   /* Check the DCMI peripheral state */
   if(hdcmi == NULL)
   {
@@ -491,7 +491,7 @@ __weak void HAL_DCMI_MspInit(DCMI_HandleTypeDef* hdcmi)
   /* NOTE : This function Should not be modified, when the callback is needed,
             the HAL_DCMI_MspInit could be implemented in the user file
    */
-}
+}//4
 
 /**
   * @brief  DeInitializes the DCMI MSP.
@@ -548,7 +548,7 @@ HAL_StatusTypeDef HAL_DCMI_Start_DMA(DCMI_HandleTypeDef* hdcmi, uint32_t DCMI_Mo
 
   /* Process Locked */
   __HAL_LOCK(hdcmi);
-
+//3
   /* Lock the DCMI peripheral state */
   hdcmi->State = HAL_DCMI_STATE_BUSY;
 
@@ -627,10 +627,10 @@ HAL_StatusTypeDef HAL_DCMI_Start_DMA(DCMI_HandleTypeDef* hdcmi, uint32_t DCMI_Mo
 
   /* Enable Capture */
   hdcmi->Instance->CR |= DCMI_CR_CAPTURE;
-
+//2
   /* Release Lock */
   __HAL_UNLOCK(hdcmi);
-
+//1
   /* Return function status */
   return HAL_OK;
 }
@@ -769,7 +769,7 @@ HAL_StatusTypeDef HAL_DCMI_Resume(DCMI_HandleTypeDef* hdcmi)
   * @retval None
   */
 void HAL_DCMI_IRQHandler(DCMI_HandleTypeDef *hdcmi)
-{
+{//7
   uint32_t isr_value = READ_REG(hdcmi->Instance->MISR);
 
   /* Synchronization error interrupt management *******************************/

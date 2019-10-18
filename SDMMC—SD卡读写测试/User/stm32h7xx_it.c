@@ -36,7 +36,6 @@
 #include "stm32h7xx_it.h"
 
 /* USER CODE BEGIN 0 */
-
 extern SD_HandleTypeDef uSdHandle;
 /* USER CODE END 0 */
 

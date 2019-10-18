@@ -1,5 +1,5 @@
-#ifndef __STM32H743_SDIO_SD_H
-#define __STM32H743_SDIO_SD_H
+#ifndef __STM324x9I_EVAL_SDIO_SD_H
+#define __STM324x9I_EVAL_SDIO_SD_H
 
 #include "stm32h7xx.h"
 //等待时间
@@ -7,13 +7,13 @@
 //块的大小（以字节为单位）
 #define BLOCK_SIZE            512 
 //块的数目
-#define NUMBER_OF_BLOCKS      50
+#define NUMBER_OF_BLOCKS      10
 //块的数据大小
 #define MULTI_BUFFER_SIZE    (BLOCK_SIZE * NUMBER_OF_BLOCKS)
 
 
-void BSP_SD_MspInit(void);
-HAL_StatusTypeDef BSP_SD_Init(void);
+static void BSP_SD_MspInit(void);
+static HAL_StatusTypeDef BSP_SD_Init(void);
 static void SD_EraseTest(void);
 static HAL_StatusTypeDef Wait_SDCARD_Ready(void);
 static HAL_StatusTypeDef Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t BufferLength);

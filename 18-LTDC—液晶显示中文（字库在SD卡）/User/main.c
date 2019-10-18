@@ -3,12 +3,12 @@
   * @file    main.c
   * @author  fire
   * @version V1.0
-  * @date    2018-xx-xx
+  * @date    2019-xx-xx
   * @brief   LTDC—液晶显示英文
   ******************************************************************
   * @attention
   *
-  * 实验平台:野火 STM32H743开发板 
+  * 实验平台:野火 STM32H743 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :http://firestm32.taobao.com
   *
@@ -17,9 +17,10 @@
 #include "stm32h7xx.h"
 #include "main.h"
 #include "./led/bsp_led.h" 
-#include "./usart/bsp_usart.h"
+#include "./usart/bsp_debug_usart.h"
 #include "./sdram/bsp_sdram.h" 
 #include "./lcd/bsp_lcd.h"
+#include "./mpu/bsp_mpu.h" 
 #include "string.h"
 
 void Delay(__IO uint32_t nCount); 
@@ -32,26 +33,24 @@ void LCD_Test(void);
   */
 int main(void)
 {   
-  /* Enable I-Cache */
-  SCB_EnableICache();
-
-  /* Enable D-Cache */
-  SCB_EnableDCache();
-
-  //将Cache设置write-through方式
-  SCB->CACR|=1<<2;  
-  
-	/* 系统时钟初始化成400MHz */
+	/* 系统时钟初始化成480MHz */
 	SystemClock_Config();
+  
+  /* 配置 MPU */
+  Board_MPU_Config(0, MPU_Normal_WT, 0xD0000000, MPU_32MB);
+  Board_MPU_Config(1, MPU_Normal_WT, 0x24000000, MPU_512KB);
+  
+  SCB_EnableICache();    // 使能指令 Cache
+  SCB_EnableDCache();    // 使能数据 Cache
+  
 	/* LED 端口初始化 */
 	LED_GPIO_Config();
 	/* 配置串口1为：115200 8-N-1 */
-	UARTx_Config();	
+	DEBUG_USART_Config();	
 	
-	printf("\r\n 欢迎使用野火  STM32 H743 开发板。\r\n");		 
-	printf("\r\n野火STM32H743 LTDC液晶显示中文测试例程\r\n");
-	/*蓝灯亮*/
-	LED_BLUE;
+	printf("\r\n 欢迎使用野火 STM32 H750 开发板。\r\n");		 
+	printf("\r\n野火 STM32H750 LTDC液晶显示中文测试例程\r\n");
+	
 	/* LCD 端口初始化 */ 
 	LCD_Init();
 	/* LCD 第一层初始化 */ 
@@ -72,11 +71,15 @@ int main(void)
 
 	/* 第二层清屏，显示全黑 */ 
 	LCD_Clear(LCD_COLOR_TRANSPARENT);
-
+  
+		/*选择字体*/
+	LCD_SetFont(&LCD_DEFAULT_FONT);
 	/* 配置第一和第二层的透明度,最小值为0，最大值为255*/
 	LCD_SetTransparency(0, 255);
 	LCD_SetTransparency(1, 0);
 
+  /*蓝灯亮*/
+	LED_BLUE;
 	while(1)
 	{		
 		LCD_Test(); 
@@ -97,9 +100,7 @@ void LCD_Test(void)
 	LCD_Clear(LCD_COLOR_BLACK);	
 	/*设置字体颜色及字体的背景颜色(此处的背景不是指LCD的背景层！注意区分)*/
 	LCD_SetColors(LCD_COLOR_WHITE,LCD_COLOR_BLACK);
-	/*选择字体*/
-	LCD_SetFont(&LCD_DEFAULT_FONT);
-
+	
 	LCD_DisplayStringLine_EN_CH(1,(uint8_t* )"(野火5.0英寸液晶屏参数)");
 	LCD_DisplayStringLine_EN_CH(2,(uint8_t* )"分辨率:800x480 像素");
 	LCD_DisplayStringLine_EN_CH(3,(uint8_t* )"触摸屏:5点电容触摸屏");
@@ -130,7 +131,7 @@ void LCD_Test(void)
 	LCD_DrawLine(300,250,400,400);  
 	LCD_DrawLine(600,250,600,400);
 
-	Delay(0xFFFFFF);
+	Delay(0x1FFFFFF);
 
 	LCD_SetColors(LCD_COLOR_BLACK,LCD_COLOR_BLACK);
 	LCD_FillRect(0,200,LCD_PIXEL_WIDTH,LCD_PIXEL_HEIGHT-200);
@@ -150,7 +151,7 @@ void LCD_Test(void)
 	LCD_SetColors(LCD_COLOR_BLUE,LCD_COLOR_BLACK);
 	LCD_DrawRect(200,350,50,200);
 
-	Delay(0xFFFFFF);
+	Delay(0x1FFFFFF);
 
 
 	LCD_SetColors(LCD_COLOR_BLACK,LCD_COLOR_BLACK);
@@ -171,7 +172,7 @@ void LCD_Test(void)
 	LCD_SetColors(LCD_COLOR_BLUE,LCD_COLOR_BLACK);
 	LCD_FillRect(200,350,50,200);
 
-	Delay(0xFFFFFF);
+	Delay(0x1FFFFFF);
 
 	LCD_SetColors(LCD_COLOR_BLACK,LCD_COLOR_BLACK);
 	LCD_FillRect(0,200,LCD_PIXEL_WIDTH,LCD_PIXEL_HEIGHT-200);
@@ -187,7 +188,7 @@ void LCD_Test(void)
 	LCD_SetColors(LCD_COLOR_GREEN,LCD_COLOR_GREEN);
 	LCD_DrawCircle(350,350,75);
 
-	Delay(0xFFFFFF);
+	Delay(0x1FFFFFF);
 
 	LCD_SetColors(LCD_COLOR_BLACK,LCD_COLOR_BLACK);
 	LCD_FillRect(0,200,LCD_PIXEL_WIDTH,LCD_PIXEL_HEIGHT-200);
@@ -196,7 +197,7 @@ void LCD_Test(void)
 	/*填充圆*/
 	LCD_SetTextColor(LCD_COLOR_BLUE);
 	LCD_ClearLine(8);
-    LCD_DisplayStringLine_EN_CH(8,(uint8_t* )"填充圆:");
+  LCD_DisplayStringLine_EN_CH(8,(uint8_t* )"填充圆:");
 
 	LCD_SetColors(LCD_COLOR_RED,LCD_COLOR_BLACK);
 	LCD_FillCircle(300,350,50);
@@ -204,7 +205,7 @@ void LCD_Test(void)
 	LCD_SetColors(LCD_COLOR_GREEN,LCD_COLOR_BLACK);
 	LCD_FillCircle(450,350,75);
 
-	Delay(0xFFFFFF);
+	Delay(0x1FFFFFF);
 
 	LCD_SetColors(LCD_COLOR_BLACK,LCD_COLOR_BLACK);
 	LCD_FillRect(0,200,LCD_PIXEL_WIDTH,LCD_PIXEL_HEIGHT-200);
@@ -228,7 +229,7 @@ void LCD_Test(void)
 	LCD_SetColors(LCD_COLOR_RED,LCD_COLOR_TRANSPARENT);
 	LCD_FillCircle(400,350,75);
 	
-	Delay(0xFFFFFF);
+	Delay(0x1FFFFFF);
 	
 	/*透明效果 背景层操作*/
 
@@ -247,7 +248,7 @@ void LCD_Test(void)
 	LCD_SetColors(LCD_COLOR_BLUE,LCD_COLOR_BLACK);
 	LCD_FillCircle(350,350,75);
 	
-	Delay(0xFFFFFF);
+	Delay(0x1FFFFFF);
 	LCD_SetColors(LCD_COLOR_BLACK,LCD_COLOR_BLACK);
 	LCD_FillRect(0,200,LCD_PIXEL_WIDTH,LCD_PIXEL_HEIGHT-200);
 
@@ -276,17 +277,16 @@ void LCD_Test(void)
   * @param  None
   * @retval None
   */
-static void SystemClock_Config(void)
+void SystemClock_Config(void)
 {
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;
-  RCC_OscInitTypeDef RCC_OscInitStruct;
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   HAL_StatusTypeDef ret = HAL_OK;
-  
-  /*使能供电配置更新 */
-  MODIFY_REG(PWR->CR3, PWR_CR3_SCUEN, 0);
-
-  /* 当器件的时钟频率低于最大系统频率时，电压调节可以优化功耗，
-		 关于系统频率的电压调节值的更新可以参考产品数据手册。  */
+  /** 启用电源配置更新
+  */
+  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
+  /** 配置主内稳压器输出电压
+  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
@@ -300,15 +300,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
 
   RCC_OscInitStruct.PLL.PLLM = 5;
-  RCC_OscInitStruct.PLL.PLLN = 196;
+  RCC_OscInitStruct.PLL.PLLN = 192;
   RCC_OscInitStruct.PLL.PLLP = 2;
   RCC_OscInitStruct.PLL.PLLR = 2;
   RCC_OscInitStruct.PLL.PLLQ = 4;
  
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
   RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
-  ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-  if(ret != HAL_OK)
+  if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     while(1) { ; }
   }
@@ -327,8 +326,7 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2; 
   RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2; 
   RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2; 
-  ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
-  if(ret != HAL_OK)
+  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
   {
     while(1) { ; }
   }

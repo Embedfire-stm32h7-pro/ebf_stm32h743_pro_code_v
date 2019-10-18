@@ -25,9 +25,9 @@
 //#include "./flash/bsp_qspi_flash.h"
 #include "./delay/core_delay.h"   
 
-#include "ff.h"
-#include "ff_gen_drv.h"
-#include "sd_diskio.h"
+#include "./FATFS/ff.h"
+#include "./FATFS/ff_gen_drv.h"
+#include "./FATFS/sd_diskio.h"
 
 
 #define POLY_X(Z)              ((int32_t)((Points + Z)->X))

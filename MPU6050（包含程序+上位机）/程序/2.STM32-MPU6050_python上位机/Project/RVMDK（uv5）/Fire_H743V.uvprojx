@@ -336,7 +336,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32H750xx,USE_DMP,MPL_LOG_NDEBUG=1,EMPL,MPU6050,EMPL_TARGET_STM32F7</Define>
+              <Define>USE_HAL_DRIVER,STM32H743xx,USE_DMP,MPL_LOG_NDEBUG=1,EMPL,MPU6050,EMPL_TARGET_STM32F7</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\FATFS;..\..\User\FATFS\drivers;..\..\User\FATFS\option;..\..\User\mpu6050\mpl;..\..\User\mpu6050\driver\include;..\..\User\mpu6050\eMPL-hal;..\..\User\mpu6050\mllite;..\..\User\mpu6050\mpl;..\..\User\mpu6050\driver\eMPL;..\..\User\mpu6050\driver\stm32L</IncludePath>
             </VariousControls>

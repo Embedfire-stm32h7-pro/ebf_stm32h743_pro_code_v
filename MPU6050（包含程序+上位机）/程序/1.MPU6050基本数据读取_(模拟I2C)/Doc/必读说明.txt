@@ -44,7 +44,7 @@ B.各总线运行时钟：
 -AXI  = 240MHz
 -APB1 = 120MHz 
 -APB2 = 120MHz 
--APB3 = 120MHz
+-APB3 = 10MHz
  
  -SDRAM时钟 = 133MHz
  

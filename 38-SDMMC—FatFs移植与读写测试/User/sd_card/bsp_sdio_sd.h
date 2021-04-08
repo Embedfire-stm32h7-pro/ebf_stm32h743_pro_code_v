@@ -3,7 +3,7 @@
 
 #include "stm32h7xx.h"
 //等待时间
-#define SD_TIMEOUT             ((uint32_t)0x00100000U)
+#define SD_TIMEOUT             ((uint32_t)0xFFFFFFFFU)
 //块的大小（以字节为单位）
 #define BLOCK_SIZE            512 
 //块的数目

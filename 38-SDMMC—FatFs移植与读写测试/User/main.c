@@ -21,7 +21,7 @@
 #include "./sd_card/bsp_sdio_sd.h"
 #include "./key/bsp_key.h" 
 #include "./mpu/bsp_mpu.h" 
-#include "./delay/core_delay.h"  
+#include "./delay/core_delay.h"
 /* FatFs includes component */
 #include "ff.h"
 #include "ff_gen_drv.h"
@@ -32,8 +32,8 @@
   ******************************************************************************
   */
 char SDPath[4]; /* SD逻辑驱动器路径 */
-static FATFS fs;													/* FatFs文件系统对象 */
-static FIL fnew;													/* 文件对象 */
+static FATFS fs = {0};								/* FatFs文件系统对象 */
+static FIL fnew = {0};								/* 文件对象 */
 static FRESULT res_sd;                /* 文件操作结果 */
 UINT fnum;            			  /* 文件成功读写数量 */
 BYTE ReadBuffer[1024]={0};        /* 读缓冲区 */
@@ -68,14 +68,16 @@ int main(void)
     /* 系统时钟初始化成480MHz */
     SystemClock_Config();
     /* 配置 MPU*/
-    Board_MPU_Config(0, MPU_Normal_WT, 0xD0000000, MPU_32MB);
+    Board_MPU_Config(0, MPU_Normal_WT, 0x20000000, MPU_128KB);
     Board_MPU_Config(1, MPU_Normal_WT, 0x24000000, MPU_512KB);
     
     SCB_EnableICache();    // 使能指令 Cache
     SCB_EnableDCache();    // 使能数据 Cache
 
     LED_GPIO_Config();
-    LED_BLUE;	
+    LED_BLUE;
+    /* 初始化时间戳 */
+    HAL_InitTick(0);
     /* 初始化USART1 配置模式为 115200 8-N-1 */
     DEBUG_USART_Config();	
     printf("****** 这是一个SD卡文件系统实验 ******\r\n");

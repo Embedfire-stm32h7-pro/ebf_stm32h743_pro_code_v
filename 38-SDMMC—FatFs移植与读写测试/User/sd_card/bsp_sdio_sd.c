@@ -67,6 +67,11 @@ void SD_Test(void)
 HAL_StatusTypeDef BSP_SD_Init(void)
 { 
     HAL_StatusTypeDef sd_state = HAL_OK;
+    RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+    
+    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SDMMC;
+    PeriphClkInitStruct.SdmmcClockSelection = RCC_SDMMCCLKSOURCE_PLL;
+    HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
     
     /* 定义SDMMC句柄 */
     uSdHandle.Instance = SDMMC1;
@@ -74,7 +79,7 @@ HAL_StatusTypeDef BSP_SD_Init(void)
     uSdHandle.Init.ClockPowerSave      = SDMMC_CLOCK_POWER_SAVE_DISABLE;
     uSdHandle.Init.BusWide             = SDMMC_BUS_WIDE_4B;
     uSdHandle.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
-    uSdHandle.Init.ClockDiv            = 8;
+    uSdHandle.Init.ClockDiv            = 3;
     
     /* 初始化SD底层驱动 */
     BSP_SD_MspInit();
@@ -340,8 +345,6 @@ void BSP_SD_MspInit(void)
         
     HAL_NVIC_SetPriority(SDMMC1_IRQn,0,0);  //配置SDMMC1中断
     HAL_NVIC_EnableIRQ(SDMMC1_IRQn);        //使能SDMMC1中断
-    
-    HAL_NVIC_SetPriority(SysTick_IRQn, 0x0E ,0);
 }
 
 //SDMMC1发送完成回调函数
@@ -353,7 +356,6 @@ void HAL_SD_TxCpltCallback(SD_HandleTypeDef *hsd)
 //SDMMC1接受完成回调函数
 void HAL_SD_RxCpltCallback(SD_HandleTypeDef *hsd)
 {
-    //SCB_InvalidateDCache_by_Addr((uint32_t*)Buffer_Block_Rx, MULTI_BUFFER_SIZE/4);
     RX_Flag=1;
 }
 /************************END OF FILE*******************/

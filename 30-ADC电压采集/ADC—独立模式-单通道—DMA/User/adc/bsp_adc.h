@@ -11,7 +11,7 @@
 
 // ADC 序号宏定义
 #define RHEOSTAT_ADC                                ADC3
-#define RHEOSTAT_ADC_CLK_ENABLE()                   __ADC3_CLK_ENABLE()
+#define RHEOSTAT_ADC_CLK_ENABLE()                   __HAL_RCC_ADC3_CLK_ENABLE()
 #define RHEOSTAT_ADC_CHANNEL                        ADC_CHANNEL_1
 
 //DMA时钟使能
